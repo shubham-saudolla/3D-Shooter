@@ -14,13 +14,13 @@ public class Player : MonoBehaviour
 	public float moveSpeed = 5f;
 	private PlayerController _controller;
 	private GunController _GunController;
-	Camera viewCamera;
+	private Camera _viewCamera;
 
 	void Start()
 	{
 		_controller = GetComponent<PlayerController>();
 		_GunController = GetComponent<GunController>();
-		viewCamera = Camera.main;
+		_viewCamera = Camera.main;
 	}
 	
 	void Update()
@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
 
 		// look input
 		// passing a ray through the main camera so that it hits the ground at the mouse position
-		Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
+		Ray ray = _viewCamera.ScreenPointToRay(Input.mousePosition);
 		// generating a plane by passing the normal to the plane and the in-position
 		// the normal is perpendicular to the plane
 		// and since the plane lies flat, it's perpendicular would be Vector3.Up

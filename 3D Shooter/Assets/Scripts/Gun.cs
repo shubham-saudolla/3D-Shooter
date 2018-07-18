@@ -14,13 +14,13 @@ public class Gun : MonoBehaviour
 	public float msBetweenShots = 100f;
 	public float muzzleVelocity = 35f;
 	
-	float nextShotTime;
+	private float _nextShotTime;
 
 	public void Shoot()
 	{
-		if(Time.time > nextShotTime)
+		if(Time.time > _nextShotTime)
 		{
-			nextShotTime = (Time.time + msBetweenShots/1000);
+			_nextShotTime = (Time.time + msBetweenShots/1000);
 			Projectile newProjectile = Instantiate(projectile, muzzle.position, muzzle.rotation) as Projectile; 
 			newProjectile.setSpeed(muzzleVelocity);
 		}

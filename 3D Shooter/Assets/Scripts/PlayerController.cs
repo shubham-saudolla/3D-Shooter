@@ -10,22 +10,22 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
-	Rigidbody rb;
-	Vector3 velocity;
+	private Rigidbody _rb;
+	private Vector3 _velocity;
 
 	void Start()
 	{
-		rb = GetComponent<Rigidbody>();
+		_rb = GetComponent<Rigidbody>();
 	}
 
 	public void FixedUpdate()
 	{
-		rb.MovePosition(rb.position + velocity*Time.deltaTime);
+		_rb.MovePosition(_rb.position + _velocity*Time.deltaTime);
 	}
 
 	public void Move(Vector3 _velocity)
 	{
-		velocity = _velocity;
+		this._velocity = _velocity;
 	}
 
 	public void LookAt(Vector3 lookPoint)
