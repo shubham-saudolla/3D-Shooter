@@ -211,6 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d318dc8877e1244a5a367fff4dae90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingHealth: 10
   moveSpeed: 5
 --- !u!114 &267908595
 MonoBehaviour:
@@ -531,6 +532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e257bf3a568a8f84bb810a5bf3a7a377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingHealth: 5
   refreshAfter: 0.5
 --- !u!136 &665998243
 CapsuleCollider:
