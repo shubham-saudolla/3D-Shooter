@@ -8,24 +8,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerController))]
+[RequireComponent(typeof(GunController))]
 public class Player : MonoBehaviour
 {
 	public float moveSpeed = 5f;
-	PlayerController controller;
+	private PlayerController _controller;
+	private GunController _GunController;
 	Camera viewCamera;
 
 	void Start()
 	{
-		controller = GetComponent<PlayerController>();
+		_controller = GetComponent<PlayerController>();
+		_GunController = GetComponent<GunController>();
 		viewCamera = Camera.main;
 	}
 	
 	void Update()
 	{
+		// movement input
 		Vector3 moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 		Vector3 moveVelocity = moveInput.normalized * moveSpeed;
-		controller.Move(moveVelocity);
+		_controller.Move(moveVelocity);
 
+		// look input
 		// passing a ray through the main camera so that it hits the ground at the mouse position
 		Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
 		// generating a plane by passing the normal to the plane and the in-position
@@ -41,7 +46,13 @@ public class Player : MonoBehaviour
 			//this would return the intersection point by adding the distance to the ray origin
 			Vector3 point = ray.GetPoint(rayDistance);
 			// Debug.DrawLine(ray.origin, point, Color.red);
-			controller.LookAt(point);
+			_controller.LookAt(point);
+		}
+
+		// weapon input
+		if(Input.GetMouseButton(0))
+		{
+			_GunController.Shoot();
 		}
 	}
 }
