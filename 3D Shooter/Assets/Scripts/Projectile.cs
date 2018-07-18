@@ -9,6 +9,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+	public LayerMask collisionMask;
 	public float speed = 1f;
 	public float destroyAfter = 1.5f;
 
@@ -25,6 +26,26 @@ public class Projectile : MonoBehaviour
 	
 	void Update()
 	{
+		float _moveDistance = speed * Time.deltaTime;
+		CheckCollsions(_moveDistance);
 		transform.Translate(Vector3.forward * Time.deltaTime * speed);
+	}
+
+	void CheckCollsions(float moveDistance)
+	{
+		Ray _ray = new Ray(transform.position, transform.forward);
+		RaycastHit _hit;
+
+		//QueryTriggerInteraction allows us to collide with triggers
+		if(Physics.Raycast(_ray, out _hit, moveDistance, collisionMask, QueryTriggerInteraction.Collide))
+		{
+			OnHitObject(_hit);
+		}
+	}
+
+	void OnHitObject(RaycastHit hit)
+	{
+		print(hit.collider.gameObject.name);
+		GameObject.Destroy(gameObject);
 	}
 }
