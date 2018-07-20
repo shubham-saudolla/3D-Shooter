@@ -13,7 +13,6 @@ public class Gun : MonoBehaviour
 	public Projectile projectile;
 	public float msBetweenShots = 100f;
 	public float muzzleVelocity = 35f;
-	
 	private float _nextShotTime;
 
 	public void Shoot()
