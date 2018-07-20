@@ -37,7 +37,7 @@ public class Projectile : MonoBehaviour
 		Ray _ray = new Ray(transform.position, transform.forward);
 		RaycastHit _hit;
 
-		//QueryTriggerInteraction allows us to collide with triggers
+		// QueryTriggerInteraction allows us to collide with triggers
 		if(Physics.Raycast(_ray, out _hit, moveDistance, collisionMask, QueryTriggerInteraction.Collide))
 		{
 			OnHitObject(_hit);
@@ -46,7 +46,7 @@ public class Projectile : MonoBehaviour
 
 	void OnHitObject(RaycastHit hit)
 	{
-		print(hit.collider.gameObject.name);
+		// print(hit.collider.gameObject.name);
 		IDamageable damageableObject = hit.collider.GetComponent<IDamageable>();
 		if(damageableObject != null)
 		{
