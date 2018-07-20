@@ -11,13 +11,19 @@ public class Projectile : MonoBehaviour
 {
 	public LayerMask collisionMask;
 	public float speed = 1f;
-	public float destroyAfter = 1.5f;
+	public float destroyAfter = 1.5f;			// the lifetime of the projectile
 	public float damage = 1f;
 
 	void Start()
 	{
 		// cleaning up the clones to avoid the cluttering up of the hierarchy
 		Destroy(this.gameObject, destroyAfter);
+
+		Collider[] initialCollisions = Physics.OverlapSphere(transform.position, 0.1f, collisionMask);
+		if(initialCollisions.Length > 0)
+		{
+			OnHitObject(initialCollisions[0]);
+		}
 	}
 
 	public void setSpeed(float newSpeed)
@@ -51,6 +57,17 @@ public class Projectile : MonoBehaviour
 		if(damageableObject != null)
 		{
 			damageableObject.TakeHit(damage, hit);
+		}
+		GameObject.Destroy(gameObject);
+	}
+
+	void OnHitObject(Collider c)
+	{
+		// print(hit.collider.gameObject.name);
+		IDamageable damageableObject = c.GetComponent<IDamageable>();
+		if(damageableObject != null)
+		{
+			damageableObject.TakeDamage(damage);
 		}
 		GameObject.Destroy(gameObject);
 	}
