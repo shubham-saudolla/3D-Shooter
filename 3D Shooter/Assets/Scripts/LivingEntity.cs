@@ -22,7 +22,7 @@ public class LivingEntity : MonoBehaviour, IDamageable
 
 	public void TakeHit(float damage, RaycastHit hit)
 	{
-		// TODO: some dtuff here with the raycast hit variable
+		// TODO: some stuff here with the raycast hit variable
 		TakeDamage(damage);
 	}
 
@@ -44,7 +44,7 @@ public class LivingEntity : MonoBehaviour, IDamageable
 		{
 			onDeath();
 		}
-		
+
 		GameObject.Destroy(gameObject);
 	}
 }

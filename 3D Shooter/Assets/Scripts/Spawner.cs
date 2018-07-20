@@ -11,7 +11,6 @@ public class Spawner : MonoBehaviour
 {
 	public Wave[] waves;
 	public Enemy enemy;
-
 	private Wave _currentWave;
 	private int _currentWaveNumber;
 	private int _enemiesRemainingToSpawn;
@@ -37,7 +36,7 @@ public class Spawner : MonoBehaviour
 
 	void OnEnemyDeath()
 	{
-		print("Enemy died");
+		// print("Enemy died");
 		_enemiesRemainingAlive--;
 
 		if(_enemiesRemainingAlive == 0)
