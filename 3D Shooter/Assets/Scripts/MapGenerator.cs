@@ -12,6 +12,9 @@ public class MapGenerator : MonoBehaviour
 	public Transform tilePrefab;
 	public Vector2 mapSize;
 
+	[Range(0,1)]
+	public float outlinePercent;
+
 	void Start()
 	{
 		GenerateMap();
@@ -27,6 +30,8 @@ public class MapGenerator : MonoBehaviour
 
 				// the tile or quad has to be rotated on the x axis by 90 degrees as it faces us
 				Transform newTile = Instantiate(tilePrefab, tilePosition, Quaternion.Euler(Vector3.right*90)) as Transform;
+
+				newTile.localScale = Vector3.one * (1 - outlinePercent);
 			}
 		}
 	}
