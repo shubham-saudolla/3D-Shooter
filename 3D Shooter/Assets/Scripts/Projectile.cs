@@ -13,6 +13,7 @@ public class Projectile : MonoBehaviour
 	public float speed = 1f;
 	public float destroyAfter = 1.5f;			// the lifetime of the projectile
 	public float damage = 1f;
+	public float skinWidth = 0.1f;
 
 	void Start()
 	{
@@ -44,7 +45,8 @@ public class Projectile : MonoBehaviour
 		RaycastHit _hit;
 
 		// QueryTriggerInteraction allows us to collide with triggers
-		if(Physics.Raycast(_ray, out _hit, moveDistance, collisionMask, QueryTriggerInteraction.Collide))
+		// skinWidth is used to improve the collision detection when the projectile and the enemies are moving at high speeds
+		if(Physics.Raycast(_ray, out _hit, moveDistance + skinWidth, collisionMask, QueryTriggerInteraction.Collide))
 		{
 			OnHitObject(_hit);
 		}
