@@ -28,6 +28,7 @@ public class Enemy : LivingEntity
 	float myCollisionRadius;
 	float targetCollisionRadius;
 	bool hasTarget;
+	public float damage = 1f;
 
 	protected override void Start()
 	{
@@ -91,9 +92,15 @@ public class Enemy : LivingEntity
 		float attackSpeed = 3;
 
 		skinMaterial.color = Color.red;
+		bool hasAppliedDamaged = false;
 
 		while(percent <= 1)
 		{
+			if(percent >= 0.5f && !hasAppliedDamaged)
+			{
+				hasAppliedDamaged = true;
+				_targetEntity.TakeDamage(damage);
+			}
 			percent += Time.deltaTime * attackSpeed;
 			float interpolation = (-Mathf.Pow(percent, 2) + percent) * 4;
 			transform.position = Vector3.Lerp(originalPosition, attackPosition, interpolation);
