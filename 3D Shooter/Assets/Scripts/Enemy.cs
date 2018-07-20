@@ -12,12 +12,12 @@ using UnityEngine.AI;
 public class Enemy : LivingEntity
 {
 	// need to include the UnityEngine.AI namespace for NavMeshAgent
-
 	public enum State{Idle, Chasing, Attacking};
 	private State _currentState;
 
 	private NavMeshAgent _pathFinder;
 	private Transform _target;
+	private LivingEntity _targetEntity;
 	Material skinMaterial;
 	Color originalColor;
 	public float refreshAfter = 0.5f;
@@ -27,33 +27,52 @@ public class Enemy : LivingEntity
 	float nextAttackTime = 0f;
 	float myCollisionRadius;
 	float targetCollisionRadius;
+	bool hasTarget;
 
 	protected override void Start()
 	{
 		base.Start();
+
 		_pathFinder = GetComponent<NavMeshAgent>();
 		skinMaterial = GetComponent<Renderer>().material;
 		originalColor = skinMaterial.color;
 
-		_currentState = State.Chasing;
-		_target = GameObject.FindGameObjectWithTag("Player").transform;
+		if(GameObject.FindGameObjectWithTag("Player") != null)
+		{
+			_target = GameObject.FindGameObjectWithTag("Player").transform;
+			_targetEntity = _target.GetComponent<LivingEntity>();
+			_targetEntity.onDeath += OnTargetDeath;
 
-		myCollisionRadius = GetComponent<CapsuleCollider>().radius;
-		targetCollisionRadius = _target.GetComponent<CapsuleCollider>().radius;
+			hasTarget = true;
 
-		StartCoroutine(UpdatePath());
+			_currentState = State.Chasing;
+
+			myCollisionRadius = GetComponent<CapsuleCollider>().radius;
+			targetCollisionRadius = _target.GetComponent<CapsuleCollider>().radius;
+
+			StartCoroutine(UpdatePath());
+		}
+	}
+
+	void OnTargetDeath()
+	{
+		hasTarget = false;
+		_currentState = State.Idle;
 	}
 	
 	void Update()
 	{
-		if(Time.time > nextAttackTime)
+		if(hasTarget)
 		{
-			float sqDstToTarget = (_target.position - transform.position).sqrMagnitude;
-
-			if(sqDstToTarget < Mathf.Pow(attackDistanceThreshold + myCollisionRadius + targetCollisionRadius, 2))
+			if(Time.time > nextAttackTime)
 			{
-				nextAttackTime = Time.time + timeBetweenAttacks;
-				StartCoroutine(Attack());
+				float sqDstToTarget = (_target.position - transform.position).sqrMagnitude;
+
+				if(sqDstToTarget < Mathf.Pow(attackDistanceThreshold + myCollisionRadius + targetCollisionRadius, 2))
+				{
+					nextAttackTime = Time.time + timeBetweenAttacks;
+					StartCoroutine(Attack());
+				}
 			}
 		}
 	}
@@ -90,7 +109,7 @@ public class Enemy : LivingEntity
 
 	IEnumerator UpdatePath()
 	{
-		while(_target != null)
+		while(hasTarget)
 		{
 			if(_currentState == State.Chasing)
 			{
@@ -101,7 +120,6 @@ public class Enemy : LivingEntity
 				{
 					_pathFinder.SetDestination(targetPosition);
 				}
-				
 			}
 
 			yield return new WaitForSeconds(refreshAfter);
