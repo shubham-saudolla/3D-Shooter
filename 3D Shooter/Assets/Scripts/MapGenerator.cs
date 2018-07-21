@@ -15,12 +15,13 @@ public class MapGenerator : MonoBehaviour
 
 	[Range(0,1)]
 	public float outlinePercent;
+	[Range(0,1)]
+	public float obstaclePercent;
 
 	private List<Coord> allTileCoords;
 	private Queue<Coord> shuffledTileCoords;
-	[SerializeField]
-	private int obstacleCount = 10;
 
+	[SerializeField]
 	public int seed = 13;
 
 	void Start()
@@ -64,6 +65,8 @@ public class MapGenerator : MonoBehaviour
 				newTile.parent = mapHolder;								// parenting the new tile to the mapholder, hierarchy matters, I guess...
 			}
 		}
+
+		int obstacleCount = (int) (mapSize.x * mapSize.y * obstaclePercent);
 
 		for(int i = 0; i < obstacleCount; i++)
 		{
