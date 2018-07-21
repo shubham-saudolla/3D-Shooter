@@ -10,6 +10,7 @@ using UnityEngine;
 public class MapGenerator : MonoBehaviour
 {
 	public Transform tilePrefab;
+	public float tileSize;
 	public Transform obstaclePrefab;
 	public Vector2 mapSize;
 
@@ -64,7 +65,7 @@ public class MapGenerator : MonoBehaviour
 				// the tile or quad has to be rotated on the x axis by 90 degrees as it faces us
 				Transform newTile = Instantiate(tilePrefab, tilePosition, Quaternion.Euler(Vector3.right*90)) as Transform;
 
-				newTile.localScale = Vector3.one * (1 - outlinePercent);
+				newTile.localScale = Vector3.one * (1 - outlinePercent) * tileSize;
 				newTile.parent = mapHolder;								// parenting the new tile to the mapholder, hierarchy matters, I guess...
 			}
 		}
@@ -85,6 +86,7 @@ public class MapGenerator : MonoBehaviour
 				Vector3 obstaclePosition = CoordToPosition(randomCoord.x, randomCoord.y);
 				Transform newObstacle = Instantiate(obstaclePrefab, obstaclePosition + Vector3.up * 0.5f, Quaternion.identity) as Transform;
 				newObstacle.parent = mapHolder;
+				newObstacle.localScale = Vector3.one * (1 - outlinePercent) * tileSize;
 			}
 			else
 			{
@@ -138,7 +140,7 @@ public class MapGenerator : MonoBehaviour
 
 	Vector3 CoordToPosition(int x, int y)
 	{
-		return new Vector3(-mapSize.x/2 + 0.5f + x, 0, -mapSize.y/2 + 0.5f + y);
+		return new Vector3(-mapSize.x/2 + 0.5f + x, 0, -mapSize.y/2 + 0.5f + y) * tileSize;
 	}
 
 	public Coord getRandomCoord()
