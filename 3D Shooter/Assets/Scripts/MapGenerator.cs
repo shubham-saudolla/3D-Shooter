@@ -23,6 +23,7 @@ public class MapGenerator : MonoBehaviour
 
 	[SerializeField]
 	public int seed = 13;
+	Coord mapCentre;
 
 	void Start()
 	{
@@ -40,6 +41,8 @@ public class MapGenerator : MonoBehaviour
 			}
 		}
 		shuffledTileCoords = new Queue<Coord>(Utility.ShuffleArray(allTileCoords.ToArray(), seed));
+
+		mapCentre = new Coord((int)mapSize.x/2, (int)mapSize.y/2);
 
 		// the previous tiles need to be deleted before generating new ones, hence 
 		string holderName = "Generator Map";							// the string which will store the name of the gameobject
@@ -66,23 +69,71 @@ public class MapGenerator : MonoBehaviour
 			}
 		}
 
+		bool [,] obstacleMap = new bool[(int)mapSize.x, (int)mapSize.y];
+ 
 		int obstacleCount = (int) (mapSize.x * mapSize.y * obstaclePercent);
+		int currentObstacleCount = 0;
 
 		for(int i = 0; i < obstacleCount; i++)
 		{
 			Coord randomCoord = getRandomCoord();
-			Vector3 obstaclePosition = CoordToPosition(randomCoord.x, randomCoord.y);
+			obstacleMap[randomCoord.x, randomCoord.y] = true;
+			currentObstacleCount++;
 
-			if(obstaclePrefab == null)
+			if(randomCoord != mapCentre && MapIsFullyAccessible(obstacleMap, currentObstacleCount))
 			{
-				Debug.LogError("No reference to an obstacle prefab");
-			}
-			else
-			{
+				Vector3 obstaclePosition = CoordToPosition(randomCoord.x, randomCoord.y);
 				Transform newObstacle = Instantiate(obstaclePrefab, obstaclePosition + Vector3.up * 0.5f, Quaternion.identity) as Transform;
 				newObstacle.parent = mapHolder;
 			}
+			else
+			{
+				obstacleMap[randomCoord.x, randomCoord.y] = false;
+				currentObstacleCount--;
+			}
 		}
+	}
+
+	// a flood-fill algorithm
+	bool MapIsFullyAccessible(bool [,] obstacleMap, int currentObstacleCount)
+	{
+		bool [,] mapFlags = new bool[obstacleMap.GetLength(0), obstacleMap.GetLength(1)];
+		Queue<Coord> queue = new Queue<Coord>();
+		queue.Enqueue(mapCentre);
+		mapFlags[mapCentre.x, mapCentre.y] = true;
+		
+		int accessibleTileCount = 1;
+
+		while(queue.Count > 0)
+		{
+			Coord tile = queue.Dequeue();
+
+
+			for(int x = -1; x <= 1; x++)
+			{
+				for(int y = -1; y <= 1; y++)
+				{
+					int neighbourX = tile.x + x;
+					int neighbourY = tile.y + y;
+
+					if(x==0 || y == 0)
+					{
+						if(neighbourX >= 0 && neighbourX < obstacleMap.GetLength(0) && neighbourY >= 0 && neighbourY < obstacleMap.GetLength(1))
+						{
+							if(!mapFlags[neighbourX, neighbourY] && !obstacleMap[neighbourX, neighbourY])
+							{
+								mapFlags[neighbourX, neighbourY] = true;
+								queue.Enqueue(new Coord(neighbourX, neighbourY));
+								accessibleTileCount++;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		int targetAccessibleTileCount = (int) (mapSize.x * mapSize.y - currentObstacleCount);
+		return targetAccessibleTileCount == accessibleTileCount;
 	}
 
 	Vector3 CoordToPosition(int x, int y)
@@ -108,6 +159,16 @@ public class MapGenerator : MonoBehaviour
 		{
 			x = _x;
 			y = _y;
+		}
+
+		public static bool operator == (Coord c1, Coord c2)
+		{
+			return c1.x == c2.x && c1.y == c2.y;
+		}
+
+		public static bool operator != (Coord c1, Coord c2)
+		{
+			return !(c1 == c2);
 		}
 	}
 }
