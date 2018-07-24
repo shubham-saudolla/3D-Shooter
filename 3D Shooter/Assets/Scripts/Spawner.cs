@@ -7,6 +7,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO: the player can hide in a corner and kill all the enemies
+// one fix could be that if the player hasn't moved in a while, the enemies will spawn at the player's location
+
 public class Spawner : MonoBehaviour
 {
 	public Wave[] waves;
@@ -17,8 +20,11 @@ public class Spawner : MonoBehaviour
 	private int _enemiesRemainingAlive;
 	private float _nextSpawnTime;
 
+	MapGenerator map;
+
 	void Start()
 	{
+		map = FindObjectOfType<MapGenerator>();
 		NextWave();
 	}
 
@@ -29,9 +35,31 @@ public class Spawner : MonoBehaviour
 			_enemiesRemainingToSpawn--;
 			_nextSpawnTime = Time.time + _currentWave.timeBetweenSpawns;
 
-			Enemy spawnedEnemy = Instantiate(enemy, Vector3.zero, Quaternion.identity) as Enemy;
-			spawnedEnemy.onDeath += OnEnemyDeath;
+			StartCoroutine(SpawnEnemy());
 		}
+	}
+
+	IEnumerator SpawnEnemy()
+	{
+		float spawnDelay = 1f;
+		float tileFlashSpeed = 4f;
+
+		Transform randomTile = map.getRandomOpenTile();
+		Material tileMat = randomTile.GetComponent<Renderer>().material;
+		Color initialColor = tileMat.color;
+		Color flashColor = Color.red;
+		float spawnTimer = 0f;
+
+		while(spawnTimer < spawnDelay)
+		{
+			tileMat.color = Color.Lerp(initialColor, flashColor, Mathf.PingPong(spawnTimer * tileFlashSpeed, 1));
+
+			spawnTimer += Time.deltaTime;
+			yield return null;
+		}
+
+		Enemy spawnedEnemy = Instantiate(enemy, randomTile.position + Vector3.up, Quaternion.identity) as Enemy;
+		spawnedEnemy.onDeath += OnEnemyDeath;
 	}
 
 	void OnEnemyDeath()
