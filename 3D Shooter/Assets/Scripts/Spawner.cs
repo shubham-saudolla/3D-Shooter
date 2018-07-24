@@ -7,13 +7,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO: the player can hide in a corner and kill all the enemies
-// one fix could be that if the player hasn't moved in a while, the enemies will spawn at the player's location
-
 public class Spawner : MonoBehaviour
 {
 	public Wave[] waves;
 	public Enemy enemy;
+
+	private LivingEntity playerEntity;
+	private Transform playerT;
+
 	private Wave _currentWave;
 	private int _currentWaveNumber;
 	private int _enemiesRemainingToSpawn;
@@ -22,20 +23,51 @@ public class Spawner : MonoBehaviour
 
 	MapGenerator map;
 
+	private float timeBetweenCampingChecks = 2f;
+	private float campThresholdDistance = 1.5f;
+	private float nextCampCheckTime;
+	private Vector3 campPositionOld;
+	private bool isCamping;
+
+	bool isDisabled;
+
 	void Start()
 	{
+		isDisabled = false;
+
+		playerEntity = FindObjectOfType<Player>();
+		playerT = playerEntity.transform;
+
+		nextCampCheckTime = timeBetweenCampingChecks + Time.time;
+		campPositionOld = playerT.position;
+		playerEntity.onDeath += OnPlayerDeath;
+
 		map = FindObjectOfType<MapGenerator>();
+
 		NextWave();
 	}
 
 	void Update()
 	{
-		if(_enemiesRemainingToSpawn > 0 && Time.time > _nextSpawnTime)
-		{
-			_enemiesRemainingToSpawn--;
-			_nextSpawnTime = Time.time + _currentWave.timeBetweenSpawns;
+		if(!isDisabled)
+		{		
+			if(Time.time > nextCampCheckTime)
+			{
+				nextCampCheckTime = Time.time + timeBetweenCampingChecks;
 
-			StartCoroutine(SpawnEnemy());
+				isCamping = (Vector3.Distance(playerT.position, campPositionOld)) < campThresholdDistance;
+
+				campPositionOld = playerT.position;
+			}
+
+
+			if(_enemiesRemainingToSpawn > 0 && Time.time > _nextSpawnTime)
+			{
+				_enemiesRemainingToSpawn--;
+				_nextSpawnTime = Time.time + _currentWave.timeBetweenSpawns;
+
+				StartCoroutine(SpawnEnemy());
+			}
 		}
 	}
 
@@ -44,8 +76,13 @@ public class Spawner : MonoBehaviour
 		float spawnDelay = 1f;
 		float tileFlashSpeed = 4f;
 
-		Transform randomTile = map.getRandomOpenTile();
-		Material tileMat = randomTile.GetComponent<Renderer>().material;
+		Transform spawnTile = map.getRandomOpenTile();
+
+		if(isCamping)
+		{
+			spawnTile = map.GetTileFromPosition(playerT.position);
+		}
+		Material tileMat = spawnTile.GetComponent<Renderer>().material;
 		Color initialColor = tileMat.color;
 		Color flashColor = Color.red;
 		float spawnTimer = 0f;
@@ -58,8 +95,13 @@ public class Spawner : MonoBehaviour
 			yield return null;
 		}
 
-		Enemy spawnedEnemy = Instantiate(enemy, randomTile.position + Vector3.up, Quaternion.identity) as Enemy;
+		Enemy spawnedEnemy = Instantiate(enemy, spawnTile.position + Vector3.up, Quaternion.identity) as Enemy;
 		spawnedEnemy.onDeath += OnEnemyDeath;
+	}
+
+	void OnPlayerDeath()
+	{
+		isDisabled = true;
 	}
 
 	void OnEnemyDeath()
