@@ -29,8 +29,14 @@ public class MapGenerator : MonoBehaviour
 
 	private Map currentMap;
 
-	void Start()
+	void Awake()
 	{
+		FindObjectOfType<Spawner>().OnNewWave += onNewWave;
+	}
+
+	void onNewWave(int waveNumber)
+	{
+		mapIndex = waveNumber - 1;
 		GenerateMap();
 	}
 
@@ -207,7 +213,7 @@ public class MapGenerator : MonoBehaviour
 		return randomCoord;
 	}
 	
-	public Transform getRandomOpenTile()
+	public Transform GetRandomOpenTile()
 	{
 		Coord randomCoord = shuffledOpenTileCoords.Dequeue();
 		shuffledOpenTileCoords.Enqueue(randomCoord);

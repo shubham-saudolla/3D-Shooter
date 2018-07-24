@@ -9,6 +9,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+	public event System.Action<int> OnNewWave;
 	public Wave[] waves;
 	public Enemy enemy;
 
@@ -76,7 +77,7 @@ public class Spawner : MonoBehaviour
 		float spawnDelay = 1f;
 		float tileFlashSpeed = 4f;
 
-		Transform spawnTile = map.getRandomOpenTile();
+		Transform spawnTile = map.GetRandomOpenTile();
 
 		if(isCamping)
 		{
@@ -120,12 +121,15 @@ public class Spawner : MonoBehaviour
 		_currentWaveNumber++;
 		
 		if(_currentWaveNumber - 1 < waves.Length)
-		{
-			print("Wave " + _currentWaveNumber);
-			_currentWave = waves[_currentWaveNumber - 1];
+		{			_currentWave = waves[_currentWaveNumber - 1];
 
 			_enemiesRemainingToSpawn = _currentWave.enemyCount;
 			_enemiesRemainingAlive = _enemiesRemainingToSpawn;
+
+			if(OnNewWave != null)
+			{
+				OnNewWave(_currentWaveNumber);
+			}
 		}
 	}
 
