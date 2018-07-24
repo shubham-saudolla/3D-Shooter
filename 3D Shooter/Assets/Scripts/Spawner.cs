@@ -116,6 +116,11 @@ public class Spawner : MonoBehaviour
 		}
 	}
 
+	void ResetPlayerPosition()
+	{
+		playerT.position = map.GetTileFromPosition(Vector3.zero).position + Vector3.up * 3;
+	}
+
 	void NextWave()
 	{
 		_currentWaveNumber++;
@@ -130,6 +135,8 @@ public class Spawner : MonoBehaviour
 			{
 				OnNewWave(_currentWaveNumber);
 			}
+
+			ResetPlayerPosition();
 		}
 	}
 
