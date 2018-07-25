@@ -41,7 +41,7 @@ public class Enemy : LivingEntity
 		{
 			_target = GameObject.FindGameObjectWithTag("Player").transform;
 			_targetEntity = _target.GetComponent<LivingEntity>();
-			_targetEntity.onDeath += OnTargetDeath;
+			_targetEntity.OnDeath += OnTargetDeath;
 
 			_hasTarget = true;
 

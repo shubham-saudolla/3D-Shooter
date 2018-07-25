@@ -41,7 +41,7 @@ public class Spawner : MonoBehaviour
 
 		nextCampCheckTime = timeBetweenCampingChecks + Time.time;
 		campPositionOld = playerT.position;
-		playerEntity.onDeath += OnPlayerDeath;
+		playerEntity.OnDeath += OnPlayerDeath;
 
 		map = FindObjectOfType<MapGenerator>();
 
@@ -97,7 +97,7 @@ public class Spawner : MonoBehaviour
 		}
 
 		Enemy spawnedEnemy = Instantiate(enemy, spawnTile.position + Vector3.up, Quaternion.identity) as Enemy;
-		spawnedEnemy.onDeath += OnEnemyDeath;
+		spawnedEnemy.OnDeath += OnEnemyDeath;
 	}
 
 	void OnPlayerDeath()
