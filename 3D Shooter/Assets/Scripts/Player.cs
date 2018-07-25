@@ -51,8 +51,8 @@ public class Player : LivingEntity
 			_controller.LookAt(point);
 		}
 
-		// weapon input
-		if(Input.GetMouseButton(0))
+		// weapon input, shoots on left mouse button down and space key
+		if(Input.GetMouseButtonDown(0) || Input.GetKey(KeyCode.Space))
 		{
 			_GunController.Shoot();
 		}
