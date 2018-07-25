@@ -9,42 +9,43 @@ using UnityEngine;
 
 public class LivingEntity : MonoBehaviour, IDamageable
 {
-	public float startingHealth;
+    public float startingHealth;
 
-	protected float health;
-	protected bool dead;
-	public event System.Action OnDeath;
+    protected float health;
+    protected bool dead;
+    public event System.Action OnDeath;
 
-	protected virtual void Start()
-	{
-		health = startingHealth;
-	}
+    protected virtual void Start()
+    {
+        health = startingHealth;
+    }
 
-	public void TakeHit(float damage, RaycastHit hit)
-	{
-		// TODO: some stuff here with the raycast hit variable
-		TakeDamage(damage);
-	}
+    public void TakeHit(float damage, RaycastHit hit)
+    {
+        // TODO: some stuff here with the raycast hit variable
+        TakeDamage(damage);
+    }
 
-	public void TakeDamage(float damage)
-	{
-		health -= damage;
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
 
-		if(health <= 0 && !dead)
-		{
-			Die();
-		}
-	}
+        if (health <= 0 && !dead)
+        {
+            Die();
+        }
+    }
 
-	protected void Die()
-	{
-		dead = true;
+    [ContextMenu("Self Destruct")]
+    protected void Die()
+    {
+        dead = true;
 
-		if(OnDeath != null)
-		{
-			OnDeath();
-		}
+        if (OnDeath != null)
+        {
+            OnDeath();
+        }
 
-		GameObject.Destroy(gameObject);
-	}
+        GameObject.Destroy(gameObject);
+    }
 }
