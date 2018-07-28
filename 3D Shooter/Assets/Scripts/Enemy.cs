@@ -61,7 +61,7 @@ public class Enemy : LivingEntity
         if (damage >= health)
         {
             GameObject deathParticles = Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitDir)) as GameObject;
-            Destroy(deathParticles.gameObject, deathEffect.startLifetime);
+            Destroy(deathParticles.gameObject, deathEffect.main.startLifetimeMultiplier);
         }
 
         base.TakeDamage(damage);
