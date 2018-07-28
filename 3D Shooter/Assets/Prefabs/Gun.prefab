@@ -11,9 +11,24 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1407369778298108}
   m_IsPrefabParent: 1
+--- !u!1 &1033873341724434
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4418039569247550}
+  m_Layer: 0
+  m_Name: Projectile Spawn 01
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1152243941613700
 GameObject:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
@@ -148,7 +163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4235261290608742}
   m_Layer: 0
-  m_Name: Projectile Spawn
+  m_Name: Projectile Spawn 02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -222,15 +237,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1152243941613700}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.48000002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4545120167632356}
   - {fileID: 4887262411829316}
   - {fileID: 4911612985622752}
-  m_Father: {fileID: 4235261290608742}
-  m_RootOrder: 0
+  m_Father: {fileID: 4240793492680336}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4218834067110292
 Transform:
@@ -243,7 +258,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4240793492680336}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0.855, y: -5.3240004, z: 20.339}
 --- !u!4 &4235261290608742
 Transform:
@@ -251,14 +266,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1649261694436932}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.48}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4124585274884094}
+  m_LocalRotation: {x: 0, y: 0.016579883, z: 0, w: 0.99986255}
+  m_LocalPosition: {x: 0.05874991, y: 0, z: 0.48000005}
+  m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+  m_Children: []
   m_Father: {fileID: 4240793492680336}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 1.9, z: 0}
 --- !u!4 &4240793492680336
 Transform:
   m_ObjectHideFlags: 1
@@ -270,11 +284,26 @@ Transform:
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
   - {fileID: 4048291521645052}
-  - {fileID: 4235261290608742}
   - {fileID: 4218834067110292}
+  - {fileID: 4124585274884094}
+  - {fileID: 4418039569247550}
+  - {fileID: 4235261290608742}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4418039569247550
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1033873341724434}
+  m_LocalRotation: {x: 0, y: -0.016579788, z: 0, w: 0.99986255}
+  m_LocalPosition: {x: -0.058749914, y: 0, z: 0.48000005}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4240793492680336}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: -1.9, z: 0}
 --- !u!4 &4545120167632356
 Transform:
   m_ObjectHideFlags: 1
@@ -534,13 +563,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0469e0c1ff6b9a943870e59b29a3bf1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  muzzle: {fileID: 4235261290608742}
+  fireMode: 1
+  projectileSpawn:
+  - {fileID: 4418039569247550}
+  - {fileID: 4235261290608742}
   projectile: {fileID: 114328257435569436, guid: 2dc9411d524379045b18a8eeb3ba9f2d,
     type: 2}
   msBetweenShots: 100
   muzzleVelocity: 35
   shell: {fileID: 4403444132517472, guid: 69c3cb880b80f19498c856c925221204, type: 2}
   shellEjector: {fileID: 4218834067110292}
+  burstCount: 3
 --- !u!212 &212651294586795166
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -54,7 +54,12 @@ public class Player : LivingEntity
         // weapon input, shoots on left mouse button down and space key
         if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space))
         {
-            _GunController.Shoot();
+            _GunController.OnTriggerHold();
+        }
+
+        if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.Space))
+        {
+            _GunController.OnTriggerRelease();
         }
     }
 }
