@@ -16,11 +16,11 @@ public class Gun : MonoBehaviour
     private float _nextShotTime;
     public Transform shell;
     public Transform shellEjector;
-    private MuzzleFlash muzzlFlash;
+    private MuzzleFlash muzzleFlash;
 
     void Start()
     {
-        muzzlFlash = GetComponent<MuzzleFlash>();
+        muzzleFlash = GetComponent<MuzzleFlash>();
     }
 
     public void Shoot()
@@ -32,7 +32,7 @@ public class Gun : MonoBehaviour
             newProjectile.setSpeed(muzzleVelocity);
 
             Instantiate(shell, shellEjector.position, shellEjector.rotation);
-            muzzlFlash.Activate();
+            muzzleFlash.Activate();
         }
     }
 }
