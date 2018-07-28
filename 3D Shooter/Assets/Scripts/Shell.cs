@@ -12,7 +12,7 @@ public class Shell : MonoBehaviour
     public Rigidbody myRigidbody;
     public float forceMin;
     public float forceMax;
-    private float lifetime = 4;
+    private float lifetime = 3;
     private float fadeTime = 2;
 
     void Start()
