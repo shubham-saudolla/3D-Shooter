@@ -11,6 +11,21 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1407369778298108}
   m_IsPrefabParent: 1
+--- !u!1 &1265985256209148
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4218834067110292}
+  m_Layer: 0
+  m_Name: Shell Eject Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1341532742174318
 GameObject:
   m_ObjectHideFlags: 1
@@ -137,6 +152,19 @@ Transform:
   m_Father: {fileID: 4048291521645052}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -105.715, y: 0, z: 0}
+--- !u!4 &4218834067110292
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1265985256209148}
+  m_LocalRotation: {x: -0.00086100586, y: -0.04702633, z: 0.17670539, w: 0.98313946}
+  m_LocalPosition: {x: 0.163, y: 0.002, z: -0.134}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4240793492680336}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0.855, y: -5.3240004, z: 20.339}
 --- !u!4 &4235261290608742
 Transform:
   m_ObjectHideFlags: 1
@@ -157,11 +185,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1407369778298108}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.49, z: 1.57}
+  m_LocalPosition: {x: -8.376475, y: 0.8702244, z: 13.75}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
   - {fileID: 4048291521645052}
   - {fileID: 4235261290608742}
+  - {fileID: 4218834067110292}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -333,3 +362,5 @@ MonoBehaviour:
     type: 2}
   msBetweenShots: 100
   muzzleVelocity: 35
+  shell: {fileID: 4403444132517472, guid: 69c3cb880b80f19498c856c925221204, type: 2}
+  shellEjector: {fileID: 4218834067110292}
