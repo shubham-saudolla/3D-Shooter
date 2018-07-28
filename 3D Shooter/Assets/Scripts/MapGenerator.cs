@@ -208,7 +208,8 @@ public class MapGenerator : MonoBehaviour
     {
         Coord randomCoord = shuffledTileCoords.Dequeue();
         shuffledTileCoords.Enqueue(randomCoord);
-        Vector3 obstaclePosition = CoordToPosition(randomCoord.x, randomCoord.y);
+
+        // Vector3 obstaclePosition = CoordToPosition(randomCoord.x, randomCoord.y);
 
         return randomCoord;
     }

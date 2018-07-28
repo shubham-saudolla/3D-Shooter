@@ -23,7 +23,7 @@ public class Projectile : MonoBehaviour
         Collider[] initialCollisions = Physics.OverlapSphere(transform.position, 0.1f, collisionMask);
         if (initialCollisions.Length > 0)
         {
-            OnHitObject(initialCollisions[0]);
+            OnHitObject(initialCollisions[0], transform.position);
         }
     }
 
@@ -48,30 +48,19 @@ public class Projectile : MonoBehaviour
         // skinWidth is used to improve the collision detection when the projectile and the enemies are moving at high speeds
         if (Physics.Raycast(_ray, out _hit, moveDistance + skinWidth, collisionMask, QueryTriggerInteraction.Collide))
         {
-            OnHitObject(_hit);
+            OnHitObject(_hit.collider, _hit.point);
         }
     }
 
-    void OnHitObject(RaycastHit hit)
-    {
-        // print(hit.collider.gameObject.name);
-        IDamageable damageableObject = hit.collider.GetComponent<IDamageable>();
 
-        if (damageableObject != null)
-        {
-            damageableObject.TakeHit(damage, hit);
-        }
 
-        GameObject.Destroy(gameObject);
-    }
-
-    void OnHitObject(Collider c)
+    void OnHitObject(Collider c, Vector3 hitPoint)
     {
         // print(hit.collider.gameObject.name);
         IDamageable damageableObject = c.GetComponent<IDamageable>();
         if (damageableObject != null)
         {
-            damageableObject.TakeDamage(damage);
+            damageableObject.TakeHit(damage, hitPoint, transform.forward);
         }
         GameObject.Destroy(gameObject);
     }

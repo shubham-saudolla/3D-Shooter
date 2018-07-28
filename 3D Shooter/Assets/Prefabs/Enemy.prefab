@@ -98,7 +98,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 5
+  deathEffect: {fileID: 198990704278838662, guid: ce024eb9047d84a42a89e7f129697045,
+    type: 2}
   refreshAfter: 0.5
+  attackDistanceThreshold: 0.5
+  damage: 1
 --- !u!136 &136114353531562586
 CapsuleCollider:
   m_ObjectHideFlags: 1

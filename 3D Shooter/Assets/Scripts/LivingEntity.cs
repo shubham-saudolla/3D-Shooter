@@ -20,13 +20,13 @@ public class LivingEntity : MonoBehaviour, IDamageable
         health = startingHealth;
     }
 
-    public void TakeHit(float damage, RaycastHit hit)
+    public virtual void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDir)
     {
         // TODO: some stuff here with the raycast hit variable
         TakeDamage(damage);
     }
 
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         health -= damage;
 
@@ -36,7 +36,7 @@ public class LivingEntity : MonoBehaviour, IDamageable
         }
     }
 
-    [ContextMenu("Self Destruct")]
+    [ContextMenu("Self Destruct")]                  // adds a self-destruct button on the script
     protected void Die()
     {
         dead = true;
