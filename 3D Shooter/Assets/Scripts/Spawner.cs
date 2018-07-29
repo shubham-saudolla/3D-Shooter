@@ -80,6 +80,7 @@ public class Spawner : MonoBehaviour
             {
                 Destroy(enemy.gameObject);
             }
+
             NextWave();
         }
     }

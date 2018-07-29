@@ -22,7 +22,6 @@ public class LivingEntity : MonoBehaviour, IDamageable
 
     public virtual void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDir)
     {
-        // TODO: some stuff here with the raycast hit variable
         TakeDamage(damage);
     }
 

@@ -15,6 +15,7 @@ public class Player : LivingEntity
     private PlayerController _controller;
     private GunController _GunController;
     private Camera _viewCamera;
+    public Transform crosshairs;
 
     protected override void Start()
     {
@@ -38,7 +39,7 @@ public class Player : LivingEntity
         // generating a plane by passing the normal to the plane and the in-position
         // the normal is perpendicular to the plane
         // and since the plane lies flat, it's perpendicular would be Vector3.Up
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        Plane groundPlane = new Plane(Vector3.up, Vector3.up * _GunController.GunHeight);
 
         float rayDistance;
 
@@ -49,6 +50,7 @@ public class Player : LivingEntity
             Vector3 point = ray.GetPoint(rayDistance);
             // Debug.DrawLine(ray.origin, point, Color.red);
             _controller.LookAt(point);
+            crosshairs.position = point;                    // the crosshair position
         }
 
         // weapon input, shoots on left mouse button down and space key
