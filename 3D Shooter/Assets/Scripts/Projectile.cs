@@ -14,6 +14,7 @@ public class Projectile : MonoBehaviour
     public float destroyAfter = 1.5f;           // the lifetime of the projectile
     public float damage = 1f;
     public float skinWidth = 0.1f;
+    public Color trailColor;
 
     void Start()
     {
@@ -25,6 +26,8 @@ public class Projectile : MonoBehaviour
         {
             OnHitObject(initialCollisions[0], transform.position);
         }
+
+        GetComponent<TrailRenderer>().material.SetColor("_TintColor", trailColor);
     }
 
     public void setSpeed(float newSpeed)
