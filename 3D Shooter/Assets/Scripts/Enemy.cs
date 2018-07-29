@@ -31,29 +31,49 @@ public class Enemy : LivingEntity
     private bool _hasTarget;
     public float damage = 1f;
 
+    void Awake()
+    {
+        _pathFinder = GetComponent<NavMeshAgent>();
+
+        if (GameObject.FindGameObjectWithTag("Player") != null)
+        {
+            _hasTarget = true;
+
+            _target = GameObject.FindGameObjectWithTag("Player").transform;
+            _targetEntity = _target.GetComponent<LivingEntity>();
+
+            _hasTarget = true;
+
+            _myCollisionRadius = GetComponent<CapsuleCollider>().radius;
+            _targetCollisionRadius = _target.GetComponent<CapsuleCollider>().radius;
+        }
+    }
+
     protected override void Start()
     {
         base.Start();
 
-        _pathFinder = GetComponent<NavMeshAgent>();
-        _skinMaterial = GetComponent<Renderer>().material;
-        _originalColor = _skinMaterial.color;
-
-        if (GameObject.FindGameObjectWithTag("Player") != null)
+        if (_hasTarget)
         {
-            _target = GameObject.FindGameObjectWithTag("Player").transform;
-            _targetEntity = _target.GetComponent<LivingEntity>();
-            _targetEntity.OnDeath += OnTargetDeath;
-
-            _hasTarget = true;
-
             _currentState = State.Chasing;
-
-            _myCollisionRadius = GetComponent<CapsuleCollider>().radius;
-            _targetCollisionRadius = _target.GetComponent<CapsuleCollider>().radius;
-
+            _targetEntity.OnDeath += OnTargetDeath;
             StartCoroutine(UpdatePath());
         }
+    }
+
+    public void SetCharacteristics(float moveSpeed, int hitsToKillPlayer, float enemyHealth, Color skinColor)
+    {
+        _pathFinder.speed = moveSpeed;
+
+        if (_hasTarget)
+        {
+            damage = Mathf.Ceil(_targetEntity.startingHealth / hitsToKillPlayer);
+        }
+
+        startingHealth = enemyHealth;
+        _skinMaterial = GetComponent<Renderer>().material;
+        _skinMaterial.color = skinColor;
+        _originalColor = _skinMaterial.color;
     }
 
     public override void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDir)
