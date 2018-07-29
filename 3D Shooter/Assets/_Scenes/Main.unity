@@ -251,7 +251,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.97979045, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -850,7 +850,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 10
   moveSpeed: 5
-  crosshairs: {fileID: 1106592890}
+  crosshairs: {fileID: 1106592891}
 --- !u!114 &267908595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3899,6 +3899,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1106592890}
   - component: {fileID: 1106592889}
+  - component: {fileID: 1106592891}
   m_Layer: 5
   m_Name: Crosshair
   m_TagString: Untagged
@@ -3965,6 +3966,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &1106592891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1106592888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80dffaf54bc08784394c834176e839c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSpeed: 50
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 512
+  dot: {fileID: 45717218}
 --- !u!1 &1120536435
 GameObject:
   m_ObjectHideFlags: 0

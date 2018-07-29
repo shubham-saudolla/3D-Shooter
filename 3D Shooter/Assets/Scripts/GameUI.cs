@@ -24,6 +24,7 @@ public class GameUI : MonoBehaviour
     {
         StartCoroutine(Fade(Color.clear, Color.black, fadeTime));
         gameOverUI.SetActive(true);
+        Cursor.visible = true;                  // curson is visible only on the gameover UI
     }
 
     public IEnumerator Fade(Color from, Color to, float time)
@@ -42,6 +43,7 @@ public class GameUI : MonoBehaviour
     // UI input
     public void StartNewGame()
     {
+        Cursor.visible = false;
         SceneManager.LoadScene("Main");
     }
 }

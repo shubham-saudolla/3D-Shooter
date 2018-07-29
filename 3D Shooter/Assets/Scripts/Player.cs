@@ -15,7 +15,7 @@ public class Player : LivingEntity
     private PlayerController _controller;
     private GunController _GunController;
     private Camera _viewCamera;
-    public Transform crosshairs;
+    public Crosshairs crosshairs;
 
     protected override void Start()
     {
@@ -48,9 +48,9 @@ public class Player : LivingEntity
         {
             //this would return the intersection point by adding the distance to the ray origin
             Vector3 point = ray.GetPoint(rayDistance);
-            // Debug.DrawLine(ray.origin, point, Color.red);
             _controller.LookAt(point);
-            crosshairs.position = point;                    // the crosshair position
+            crosshairs.transform.position = point;                    // the crosshair position
+            crosshairs.DetectTargets(ray);
         }
 
         // weapon input, shoots on left mouse button down and space key
