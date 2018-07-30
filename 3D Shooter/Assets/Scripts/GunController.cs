@@ -65,4 +65,12 @@ public class GunController : MonoBehaviour
             _equippedGun.Aim(aimPoint);
         }
     }
+
+    public void Reload()
+    {
+        if (_equippedGun != null)
+        {
+            _equippedGun.Reload();
+        }
+    }
 }
