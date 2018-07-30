@@ -51,7 +51,11 @@ public class Player : LivingEntity
             _controller.LookAt(point);
             crosshairs.transform.position = point;                    // the crosshair position
             crosshairs.DetectTargets(ray);
-            _GunController.Aim(point);
+            // print((new Vector2(point.x, point.z) - new Vector2(transform.position.x, transform.position.z)).sqrMagnitude);
+            if ((new Vector2(point.x, point.z) - new Vector2(transform.position.x, transform.position.z)).sqrMagnitude > 1)         //using sqr mabnitude, since 1^2 = 1, we compare with 1
+            {
+                _GunController.Aim(point);
+            }
         }
 
         // weapon input, shoots on left mouse button down and space key
