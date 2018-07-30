@@ -51,6 +51,7 @@ public class Player : LivingEntity
             _controller.LookAt(point);
             crosshairs.transform.position = point;                    // the crosshair position
             crosshairs.DetectTargets(ray);
+            _GunController.Aim(point);
         }
 
         // weapon input, shoots on left mouse button down and space key

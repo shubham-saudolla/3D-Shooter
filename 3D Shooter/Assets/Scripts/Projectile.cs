@@ -55,8 +55,6 @@ public class Projectile : MonoBehaviour
         }
     }
 
-
-
     void OnHitObject(Collider c, Vector3 hitPoint)
     {
         // print(hit.collider.gameObject.name);

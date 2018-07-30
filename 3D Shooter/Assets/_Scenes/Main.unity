@@ -2394,7 +2394,7 @@ MonoBehaviour:
   developerMode: 1
   waves:
   - infinite: 0
-    enemyCount: 20
+    enemyCount: 0
     timeBetweenSpawns: 1
     moveSpeed: 2.2
     hitsToKillPlayer: 5

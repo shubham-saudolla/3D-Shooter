@@ -57,4 +57,12 @@ public class GunController : MonoBehaviour
             return weaponHold.position.y;
         }
     }
+
+    public void Aim(Vector3 aimPoint)
+    {
+        if (_equippedGun != null)
+        {
+            _equippedGun.Aim(aimPoint);
+        }
+    }
 }
