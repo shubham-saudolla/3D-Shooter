@@ -16,26 +16,28 @@ public class Gun : MonoBehaviour
     public Projectile projectile;
     public float msBetweenShots = 100f;
     public float muzzleVelocity = 35f;
-    private float _nextShotTime;
+    public int burstCount;
+
+    [Header("Effects")]
     public Transform shell;
     public Transform shellEjector;
     private MuzzleFlash muzzleFlash;
+    private float _nextShotTime;
 
-    public int burstCount;
-
-    bool triggerReleasedSinceLastShot;
-    int shotsRemaininginBurst;
-
-    Vector3 recoilSmoothDampVelocity;
-
-    float recoilAngle;
-    float recoilRotSmoothDampVel;
-
+    [Header("Recoil")]
     public Vector2 kickMinMax = new Vector2(0.05f, 0.2f);
     public Vector2 recoilAngleMinMax = new Vector2(3, 5);
-
     public float recoilMoveSettleTime = 0.1f;
     public float recoilRotationSettleTime = 0.1f;
+
+
+    private bool triggerReleasedSinceLastShot;
+    private int shotsRemaininginBurst;
+
+    private Vector3 recoilSmoothDampVelocity;
+
+    private float recoilAngle;
+    private float recoilRotSmoothDampVel;
 
     void Start()
     {
