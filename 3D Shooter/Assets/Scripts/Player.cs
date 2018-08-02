@@ -17,13 +17,22 @@ public class Player : LivingEntity
     private Camera _viewCamera;
     public Crosshairs crosshairs;
 
-    protected override void Start()
+    void Awake()
     {
-        base.Start();
-
         _controller = GetComponent<PlayerController>();
         _GunController = GetComponent<GunController>();
         _viewCamera = Camera.main;
+        FindObjectOfType<Spawner>().OnNewWave += OnNewWave;
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+    }
+
+    public void OnNewWave(int waveNumber)
+    {
+        health = startingHealth;
     }
 
     void Update()

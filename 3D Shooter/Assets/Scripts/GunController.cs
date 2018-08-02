@@ -11,15 +11,12 @@ public class GunController : MonoBehaviour
 {
     public Transform weaponHold;
     public Gun[] allGuns;
-    private Gun _equippedGun;
     public Gun startingGun;
+    private Gun _equippedGun;
 
     void Start()
     {
-        if (startingGun != null)
-        {
-            EquipGun(startingGun);
-        }
+        EquipGun(startingGun);
     }
 
     public void EquipGun(Gun gunToEquip)
