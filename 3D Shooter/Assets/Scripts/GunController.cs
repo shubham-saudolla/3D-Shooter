@@ -10,15 +10,12 @@ using UnityEngine;
 public class GunController : MonoBehaviour
 {
     public Transform weaponHold;
-    public Gun startingGun;
+    public Gun[] allGuns;
     private Gun _equippedGun;
 
     void Start()
     {
-        if (startingGun != null)
-        {
-            EquipGun(startingGun);
-        }
+
     }
 
     public void EquipGun(Gun gunToEquip)
