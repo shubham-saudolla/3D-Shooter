@@ -966,6 +966,8 @@ MonoBehaviour:
   - {fileID: 114810616572490192, guid: 488036bd9f9b04426a34fedb9079f997, type: 2}
   - {fileID: 114544469015218508, guid: 2e1ce6894843d42429ac1523bf278404, type: 2}
   - {fileID: 114791275450139140, guid: f7293d2c7785040f1934c99e7fa89fe1, type: 2}
+  startingGun: {fileID: 114862859395924498, guid: be40e0d31818f4592bef4bcccb0cf1ca,
+    type: 2}
 --- !u!1 &270774976
 GameObject:
   m_ObjectHideFlags: 0
