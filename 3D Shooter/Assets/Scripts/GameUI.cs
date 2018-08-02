@@ -39,7 +39,8 @@ public class GameUI : MonoBehaviour
         string enemyCountString = ((spawner.waves[waveNumber - 1].infinite) ? "Infifinte" : spawner.waves[waveNumber - 1].enemyCount + "");
         newWaveEnemyCount.text = "Enemies: " + enemyCountString;
 
-        StartCoroutine(AnimateNewWaveBanner());
+        StopCoroutine("AnimateNewWaveBanner");      // to improve animation while in developer mode
+        StartCoroutine("AnimateNewWaveBanner");
     }
 
     IEnumerator AnimateNewWaveBanner()
