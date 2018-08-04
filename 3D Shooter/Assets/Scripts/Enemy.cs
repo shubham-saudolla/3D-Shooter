@@ -16,7 +16,6 @@ public class Enemy : LivingEntity
     private State _currentState;
 
     public ParticleSystem deathEffect;
-    public static event System.Action OnDeathStatic;
 
     private NavMeshAgent _pathFinder;
     private Transform _target;
@@ -83,10 +82,6 @@ public class Enemy : LivingEntity
 
         if (damage >= health)
         {
-            if (OnDeathStatic != null)
-            {
-                OnDeathStatic();
-            }
             AudioManager.instance.PlaySound("EnemyDeath", transform.position);
             GameObject deathParticles = Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitDir)) as GameObject;
             Destroy(deathParticles.gameObject, deathEffect.main.startLifetimeMultiplier);
