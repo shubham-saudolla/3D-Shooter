@@ -1108,7 +1108,7 @@ MonoBehaviour:
   - {fileID: 114810616572490192, guid: 488036bd9f9b04426a34fedb9079f997, type: 2}
   - {fileID: 114544469015218508, guid: 2e1ce6894843d42429ac1523bf278404, type: 2}
   - {fileID: 114791275450139140, guid: f7293d2c7785040f1934c99e7fa89fe1, type: 2}
-  startingGun: {fileID: 114931065958940884, guid: d603f2009b9424db0b921341cb3d3784,
+  startingGun: {fileID: 114862859395924498, guid: be40e0d31818f4592bef4bcccb0cf1ca,
     type: 2}
 --- !u!1 &282840810
 GameObject:
@@ -2566,14 +2566,14 @@ MonoBehaviour:
     timeBetweenSpawns: 0.8
     moveSpeed: 2.6
     hitsToKillPlayer: 4
-    enemyHealth: 1
+    enemyHealth: 2
     skinColor: {r: 0, g: 0.3202304, b: 0.5377358, a: 0}
   - infinite: 0
     enemyCount: 35
     timeBetweenSpawns: 0.8
     moveSpeed: 2.8
     hitsToKillPlayer: 3
-    enemyHealth: 2
+    enemyHealth: 3
     skinColor: {r: 0.5552, g: 0.3443396, b: 1, a: 0}
   - infinite: 0
     enemyCount: 40
@@ -3213,6 +3213,7 @@ GameObject:
   - component: {fileID: 986273281}
   - component: {fileID: 986273280}
   - component: {fileID: 986273282}
+  - component: {fileID: 986273283}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -3261,6 +3262,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainTheme: {fileID: 8300000, guid: 9bb1b6746dbac4344990c2b7a32ed10f, type: 3}
   menuTheme: {fileID: 8300000, guid: 2aca300ee56375944b7951864ca1d92d, type: 3}
+--- !u!114 &986273283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 986273279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 985e9d7cf2d4cf6478e724793d103280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundGroups:
+  - groupID: Impact
+    group:
+    - {fileID: 8300000, guid: d7005c4d864f3594a94177aa7f7dd2bf, type: 3}
+    - {fileID: 8300000, guid: 85096db6544693044a1787a49b18082b, type: 3}
+    - {fileID: 8300000, guid: db1fa2142cc39654ca928430f4785b7a, type: 3}
+  - groupID: EnemyDeath
+    group:
+    - {fileID: 8300000, guid: bfca0bdd928491741bf50995abc6c4e3, type: 3}
+    - {fileID: 8300000, guid: eed1be5ba70e481428d4fd65b3915d61, type: 3}
+  - groupID: EnemyAttack
+    group:
+    - {fileID: 8300000, guid: ef3b05e729cef3541b586ff1d0a70ad8, type: 3}
 --- !u!1 &987514905
 GameObject:
   m_ObjectHideFlags: 0

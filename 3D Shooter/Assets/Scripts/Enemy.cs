@@ -78,8 +78,11 @@ public class Enemy : LivingEntity
 
     public override void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDir)
     {
+        AudioManager.instance.PlaySound("Impact", transform.position);
+
         if (damage >= health)
         {
+            AudioManager.instance.PlaySound("EnemyDeath", transform.position);
             GameObject deathParticles = Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitDir)) as GameObject;
             Destroy(deathParticles.gameObject, deathEffect.main.startLifetimeMultiplier);
         }
@@ -104,7 +107,7 @@ public class Enemy : LivingEntity
                 if (sqDstToTarget < Mathf.Pow(attackDistanceThreshold + _myCollisionRadius + _targetCollisionRadius, 2))
                 {
                     _nextAttackTime = Time.time + _timeBetweenAttacks;
-
+                    AudioManager.instance.PlaySound("EnemyAttack", transform.position);
                     StartCoroutine(Attack());
                 }
             }
