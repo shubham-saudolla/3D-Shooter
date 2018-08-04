@@ -35,7 +35,7 @@ public class LivingEntity : MonoBehaviour, IDamageable
     }
 
     [ContextMenu("Self Destruct")]                  // adds a self-destruct button on the script
-    protected void Die()
+    public virtual void Die()
     {
         dead = true;
 

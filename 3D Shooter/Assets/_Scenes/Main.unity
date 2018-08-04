@@ -1108,7 +1108,7 @@ MonoBehaviour:
   - {fileID: 114810616572490192, guid: 488036bd9f9b04426a34fedb9079f997, type: 2}
   - {fileID: 114544469015218508, guid: 2e1ce6894843d42429ac1523bf278404, type: 2}
   - {fileID: 114791275450139140, guid: f7293d2c7785040f1934c99e7fa89fe1, type: 2}
-  startingGun: {fileID: 114862859395924498, guid: be40e0d31818f4592bef4bcccb0cf1ca,
+  startingGun: {fileID: 114791275450139140, guid: f7293d2c7785040f1934c99e7fa89fe1,
     type: 2}
 --- !u!1 &282840810
 GameObject:
@@ -3233,7 +3233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   masterVolPercent: 1
-  sfxVolpercent: 1
+  sfxVolPercent: 1
   musicVolPercent: 0.01
 --- !u!4 &986273281
 Transform:
@@ -3286,6 +3286,12 @@ MonoBehaviour:
   - groupID: EnemyAttack
     group:
     - {fileID: 8300000, guid: ef3b05e729cef3541b586ff1d0a70ad8, type: 3}
+  - groupID: LevelCompleted
+    group:
+    - {fileID: 8300000, guid: 6469155b055fd30498c0773f16f5d607, type: 3}
+  - groupID: PlayerDeath
+    group:
+    - {fileID: 8300000, guid: d1eac942eb38a324184e10518c66f312, type: 3}
 --- !u!1 &987514905
 GameObject:
   m_ObjectHideFlags: 0
