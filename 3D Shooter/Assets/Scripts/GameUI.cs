@@ -17,6 +17,7 @@ public class GameUI : MonoBehaviour
     public RectTransform newWaveBanner;
     public Text newWaveTitle;
     public Text newWaveEnemyCount;
+    public Text scoreUI;
     public float bannerSpeed = 2f;
 
     private Spawner spawner;
@@ -32,6 +33,11 @@ public class GameUI : MonoBehaviour
         spawner.OnNewWave += OnNewWave;
     }
 
+    void Update()
+    {
+        scoreUI.text = ScoreKeeper.score.ToString("D6");        // so that the score is always in the form of six digits
+    }
+
     void OnNewWave(int waveNumber)
     {
         string[] numbers = { "One", "Two", "Three", "Four", "Five" };
@@ -39,7 +45,7 @@ public class GameUI : MonoBehaviour
         string enemyCountString = ((spawner.waves[waveNumber - 1].infinite) ? "Infifinte" : spawner.waves[waveNumber - 1].enemyCount + "");
         newWaveEnemyCount.text = "Enemies: " + enemyCountString;
 
-        StopCoroutine("AnimateNewWaveBanner");      // to improve animation while in developer mode
+        StopCoroutine("AnimateNewWaveBanner");                  // to improve animation while in developer mode
         StartCoroutine("AnimateNewWaveBanner");
     }
 
