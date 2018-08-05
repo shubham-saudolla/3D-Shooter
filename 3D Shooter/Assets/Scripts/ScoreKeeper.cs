@@ -14,6 +14,11 @@ public class ScoreKeeper : MonoBehaviour
     private float streakExpiryTime = 1f;
     private int streakCount;
 
+    void Awake()
+    {
+        score = 0;
+    }
+
     void Start()
     {
         Enemy.OnDeathStatic += OnEnemyKilled;

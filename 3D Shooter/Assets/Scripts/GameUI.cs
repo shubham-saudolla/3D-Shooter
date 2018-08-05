@@ -19,6 +19,7 @@ public class GameUI : MonoBehaviour
     public Text newWaveEnemyCount;
     public float bannerSpeed = 2f;
     public Text scoreUI;
+    public Text gameOverScoreUI;
     public RectTransform healthBar;
     private float healthPercent;
 
@@ -83,14 +84,17 @@ public class GameUI : MonoBehaviour
                 }
             }
 
-            newWaveBanner.anchoredPosition = Vector2.up * Mathf.Lerp(-419, -106, animatePercent);
+            newWaveBanner.anchoredPosition = Vector2.up * Mathf.Lerp(-419, -202, animatePercent);
             yield return null;
         }
     }
 
     void OnGameOver()
     {
-        StartCoroutine(Fade(Color.clear, Color.black, fadeTime));
+        StartCoroutine(Fade(Color.clear, new Color(0, 0, 0, 0.95f), fadeTime));
+        gameOverScoreUI.text = scoreUI.text;
+        scoreUI.gameObject.SetActive(false);
+        healthBar.transform.parent.gameObject.SetActive(false);
         gameOverUI.SetActive(true);
         Cursor.visible = true;                  // curson is visible only on the gameover UI
     }
@@ -113,5 +117,10 @@ public class GameUI : MonoBehaviour
     {
         Cursor.visible = false;
         SceneManager.LoadScene("Main");
+    }
+
+    public void ReturnToMainMenu()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }
