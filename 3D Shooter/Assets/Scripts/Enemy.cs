@@ -72,6 +72,7 @@ public class Enemy : LivingEntity
         }
 
         startingHealth = enemyHealth;
+        deathEffect.startColor = new Color(skinColor.r, skinColor.g, skinColor.b, 1);
         _skinMaterial = GetComponent<Renderer>().material;
         _skinMaterial.color = skinColor;
         _originalColor = _skinMaterial.color;
