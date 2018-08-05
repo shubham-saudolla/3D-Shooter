@@ -18,18 +18,24 @@ public class GameUI : MonoBehaviour
     public Text newWaveTitle;
     public Text newWaveEnemyCount;
     public float bannerSpeed = 2f;
+    public Text scoreUI;
 
     private Spawner spawner;
+
+    void Awake()
+    {
+        spawner = FindObjectOfType<Spawner>();
+        spawner.OnNewWave += OnNewWave;
+    }
 
     void Start()
     {
         FindObjectOfType<Player>().OnDeath += OnGameOver;
     }
 
-    void Awake()
+    void Update()
     {
-        spawner = FindObjectOfType<Spawner>();
-        spawner.OnNewWave += OnNewWave;
+        scoreUI.text = ScoreKeeper.score.ToString("D6");
     }
 
     void OnNewWave(int waveNumber)
