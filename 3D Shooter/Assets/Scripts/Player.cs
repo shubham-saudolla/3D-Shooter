@@ -11,7 +11,7 @@ using UnityEngine;
 [RequireComponent(typeof(GunController))]
 public class Player : LivingEntity
 {
-    public float moveSpeed = 5f;
+    public float moveSpeed = 4.5f;
     private PlayerController _controller;
     private GunController _GunController;
     private Camera _viewCamera;

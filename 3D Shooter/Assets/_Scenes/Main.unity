@@ -2711,6 +2711,8 @@ MonoBehaviour:
     enemyCount: 15
     timeBetweenSpawns: 1
     moveSpeed: 2.2
+    minSpeed: 2
+    maxSpeed: 2.5
     hitsToKillPlayer: 5
     enemyHealth: 1
     skinColor: {r: 0, g: 1, b: 0.38447714, a: 0}
@@ -2718,6 +2720,8 @@ MonoBehaviour:
     enemyCount: 25
     timeBetweenSpawns: 0.8
     moveSpeed: 2.6
+    minSpeed: 2.2
+    maxSpeed: 3
     hitsToKillPlayer: 4
     enemyHealth: 2
     skinColor: {r: 0, g: 0.3202304, b: 0.5377358, a: 0}
@@ -2725,6 +2729,8 @@ MonoBehaviour:
     enemyCount: 35
     timeBetweenSpawns: 0.8
     moveSpeed: 2.8
+    minSpeed: 0
+    maxSpeed: 0
     hitsToKillPlayer: 3
     enemyHealth: 3
     skinColor: {r: 0.5552, g: 0.3443396, b: 1, a: 0}
@@ -2732,13 +2738,17 @@ MonoBehaviour:
     enemyCount: 40
     timeBetweenSpawns: 0.7
     moveSpeed: 2.9
+    minSpeed: 2.7
+    maxSpeed: 3.2
     hitsToKillPlayer: 3
     enemyHealth: 2
     skinColor: {r: 0.990566, g: 0.8624224, b: 0.0046724924, a: 0}
   - infinite: 1
     enemyCount: -1
     timeBetweenSpawns: 0.6
-    moveSpeed: 3.5
+    moveSpeed: 3
+    minSpeed: 3
+    maxSpeed: 3.5
     hitsToKillPlayer: 1
     enemyHealth: 1
     skinColor: {r: 0, g: 0, b: 0, a: 0}

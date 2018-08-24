@@ -6,6 +6,7 @@ https://github.com/shubham-saudolla
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Spawner : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class Spawner : MonoBehaviour
     public Enemy enemy;
 
     private LivingEntity playerEntity;
-    private Transform playerT;
+    private GameObject playerT;
 
     private Wave _currentWave;
     private int _currentWaveNumber;
@@ -39,10 +40,10 @@ public class Spawner : MonoBehaviour
         isDisabled = false;
 
         playerEntity = FindObjectOfType<Player>();
-        playerT = playerEntity.transform;
+        playerT = playerEntity.gameObject;
 
         nextCampCheckTime = timeBetweenCampingChecks + Time.time;
-        campPositionOld = playerT.position;
+        campPositionOld = playerT.transform.position;
         playerEntity.OnDeath += OnPlayerDeath;
 
         map = FindObjectOfType<MapGenerator>();
@@ -58,9 +59,9 @@ public class Spawner : MonoBehaviour
             {
                 nextCampCheckTime = Time.time + timeBetweenCampingChecks;
 
-                isCamping = (Vector3.Distance(playerT.position, campPositionOld)) < campThresholdDistance;
+                isCamping = (Vector3.Distance(playerT.transform.position, campPositionOld)) < campThresholdDistance;
 
-                campPositionOld = playerT.position;
+                campPositionOld = playerT.transform.position;
             }
 
 
@@ -94,7 +95,7 @@ public class Spawner : MonoBehaviour
 
         if (isCamping)
         {
-            spawnTile = map.GetTileFromPosition(playerT.position);
+            spawnTile = map.GetTileFromPosition(playerT.transform.position);
         }
         Material tileMat = spawnTile.GetComponent<Renderer>().material;
         Color initialColor = Color.white;
@@ -110,6 +111,7 @@ public class Spawner : MonoBehaviour
         }
 
         Enemy spawnedEnemy = Instantiate(enemy, spawnTile.position + Vector3.up, Quaternion.identity) as Enemy;
+        spawnedEnemy.GetComponent<NavMeshAgent>().speed = Random.Range(_currentWave.minSpeed, _currentWave.maxSpeed);
         spawnedEnemy.OnDeath += OnEnemyDeath;
         spawnedEnemy.SetCharacteristics(_currentWave.moveSpeed, _currentWave.hitsToKillPlayer, _currentWave.enemyHealth, _currentWave.skinColor);
     }
@@ -132,7 +134,7 @@ public class Spawner : MonoBehaviour
 
     void ResetPlayerPosition()
     {
-        playerT.position = map.GetTileFromPosition(Vector3.zero).position + Vector3.up * 3;
+        playerT.transform.position = map.GetTileFromPosition(Vector3.zero).position + Vector3.up * 3;
     }
 
     void NextWave()
@@ -156,6 +158,7 @@ public class Spawner : MonoBehaviour
             }
 
             ResetPlayerPosition();
+            playerT.GetComponent<Player>().moveSpeed += 0.5f;
         }
     }
 
@@ -167,6 +170,8 @@ public class Spawner : MonoBehaviour
         public float timeBetweenSpawns;
 
         public float moveSpeed;
+        public float minSpeed;
+        public float maxSpeed;
         public int hitsToKillPlayer;
         public float enemyHealth;
         public Color skinColor;
