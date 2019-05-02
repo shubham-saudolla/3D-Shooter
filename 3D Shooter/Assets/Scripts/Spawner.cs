@@ -74,16 +74,16 @@ public class Spawner : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Return))               // developer mode
-        {
-            StopCoroutine("SpawnEnemy");
-            foreach (Enemy enemy in FindObjectsOfType<Enemy>())
-            {
-                Destroy(enemy.gameObject);
-            }
+        // if (Input.GetKeyDown(KeyCode.Return))               // developer mode
+        // {
+        //     StopCoroutine("SpawnEnemy");
+        //     foreach (Enemy enemy in FindObjectsOfType<Enemy>())
+        //     {
+        //         Destroy(enemy.gameObject);
+        //     }
 
-            NextWave();
-        }
+        //     NextWave();
+        // }
     }
 
     IEnumerator SpawnEnemy()
