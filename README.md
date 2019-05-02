@@ -14,7 +14,7 @@ An awesome 3D shooter game.
 
 ---
 
-A simple 3D shooter with lots of particle effects, smart enemy pathfinding and an intellignet system that discourages camping and encourages player movement!
+A simple 3D shooter with lots of particle effects, smart enemy pathfinding and an intelligent system that discourages camping and encourages player movement!
 
 ---
 
