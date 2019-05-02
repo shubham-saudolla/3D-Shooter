@@ -7,7 +7,19 @@
 
 An awesome 3D shooter game.
 
-<a href="https://github.com/shubham-saudolla/media/blob/master/ZigZag/ZigZagScreenshot.png?raw=true" target="_blank"><img src="https://github.com/shubham-saudolla/media/blob/master/ZigZag/ZigZagScreenshot.png?raw=true" height = "500"/></a>
+<a href="https://github.com/shubham-saudolla/media/blob/master/3D-Shooter/3DshooterScreenshot.png?raw=true" target="_blank"><img src="https://github.com/shubham-saudolla/media/blob/master/3D-Shooter/3DshooterScreenshot.png?raw=true" width = "769"/></a>
 
 [![Download](https://img.shields.io/static/v1.svg?label=Download&message=Unity&style=for-the-badge&labelColor=000000&color=4505ff)](https://unity3d.com)
 </div>
+
+---
+
+A simple 3D shooter with lots of particle effects, smart enemy pathfinding and an intellignet system that discourages camping and encourages player movement!
+
+---
+
+## Useful Information
+
+If you'd like to report a bug with the game, please raise an issue with the repository.
+
+👾 Shubham.
