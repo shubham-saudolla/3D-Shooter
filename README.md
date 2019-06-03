@@ -7,7 +7,7 @@
 
 An awesome 3D shooter game.
 
-<a href="https://github.com/shubham-saudolla/media/blob/master/3D-Shooter/3DshooterScreenshot.png?raw=true" target="_blank"><img src="https://github.com/shubham-saudolla/media/blob/master/3D-Shooter/3DshooterScreenshot.png?raw=true" width = "769"/></a>
+<a href="https://github.com/shubham-saudolla/media/blob/master/3D-Shooter/3DshooterScreenshot.png?raw=true" target="_blank"><img src="https://github.com/shubham-saudolla/media/blob/master/3D-Shooter/shooterScreenshot.png?raw=true" width = "769"/></a>
 
 [![Download](https://img.shields.io/static/v1.svg?label=Download&message=Unity&style=for-the-badge&labelColor=000000&color=4505ff)](https://unity3d.com)
 </div>
