@@ -19,7 +19,6 @@ public class MapGenerator : MonoBehaviour
     public Transform navMeshMaskPrefab;
     public Vector2 maxMapSize;
 
-
     [Range(0, 1)]
     public float outlinePercent;
 
